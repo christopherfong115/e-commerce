@@ -21,6 +21,8 @@ const ProductPage = ({ products }: { products: any }) => {
         <h1>{products.productName}</h1>
         <h1>{products.inStock}</h1>
         <img src={products.imageLink[0]} />
+        <div>{products.description}</div>
+        <div>{`$${products.price}`}</div>
       </div>
     </>
   );

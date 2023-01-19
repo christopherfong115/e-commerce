@@ -18,7 +18,8 @@ export interface Product {
   description: string;
   inStock: number;
   variations?: Product[];
-  ratings: Ratings[]
+  ratings: Ratings[];
+  price: number;
 }
 
 export interface ShoppingCartInitialState {
@@ -37,10 +38,12 @@ export const cartSlice = createSlice({
       state.cart.push(action.payload);
     },
     removeFromCart: (state, action: PayloadAction<Product>) => {
-      state.cart = state.cart.filter((item) => item.productid != action.payload.productid);
+      state.cart = state.cart.filter(
+        (item) => item.productid != action.payload.productid
+      );
     },
   },
 });
 
-export const {addToCart, removeFromCart} = cartSlice.actions;
-export default cartSlice.reducer
+export const { addToCart, removeFromCart } = cartSlice.actions;
+export default cartSlice.reducer;

@@ -1,20 +1,14 @@
 import Head from "next/head";
-import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import { motion } from "framer-motion";
 import {
   auth,
-  db,
   EmailPasswordLogin,
   signInWithGoogle,
 } from "../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
-import { userLoggedIn } from "../redux/user/userSlice";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { User } from "firebase/auth";
 import Link from "next/link";
 
 const login = () => {
