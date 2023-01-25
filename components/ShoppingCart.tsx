@@ -7,7 +7,7 @@ const ShoppingCart = () => {
   const { cart } = useAppSelector((state) => state.cart);
   return (
     <>
-      <div className="absolute bg-indigo-500 max-h-[600px] overflow-y-scroll w-[450px] p-5 right-0 translate-y-3">
+      <div className="absolute bg-indigo-500 max-h-[600px] overflow-y-scroll w-[450px] p-5 right-0 translate-y-3 z-50">
         {cart.length != 0 ? (
           <ul>
             {cart.map((product) => (
