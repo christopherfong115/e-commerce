@@ -11,7 +11,10 @@ const ShoppingCart = () => {
         {cart.length != 0 ? (
           <ul>
             {cart.map((product) => (
-              <li className="bg-amber-100 mb-4 p-4" key={product.productid}>
+              <li
+                className="bg-amber-100 mb-4 p-4"
+                key={product.product.productid}
+              >
                 <CartItem item={product} />
               </li>
             ))}

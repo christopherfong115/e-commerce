@@ -22,8 +22,13 @@ export interface Product {
   price: number;
 }
 
+export interface ShoppingCartItem {
+  product: Product;
+  count: number;
+}
+
 export interface ShoppingCartInitialState {
-  cart: Product[];
+  cart: ShoppingCartItem[];
 }
 
 const initialState: ShoppingCartInitialState = {
@@ -35,11 +40,17 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<Product>) => {
-      state.cart.push(action.payload);
+      for (let i = 0; i < state.cart.length; i++) {
+        if (state.cart[i].product.productid === action.payload.productid) {
+          state.cart[i].count += 1;
+          return;
+        }
+      }
+      state.cart.push({ product: action.payload, count: 1 });
     },
     removeFromCart: (state, action: PayloadAction<Product>) => {
       state.cart = state.cart.filter(
-        (item) => item.productid != action.payload.productid
+        (item) => item.product.productid != action.payload.productid
       );
     },
   },

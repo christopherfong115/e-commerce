@@ -29,6 +29,10 @@ const ProductGridItem = ({ item }: { item: Product }) => {
             className="w-fit hover:text-blue-500 cursor-pointer rounded-2xl bg-slate-200 p-2"
             onClick={(e) => {
               e.preventDefault();
+              const itemToCart = {
+                product: item,
+                count: 1,
+              };
               dispatch(addToCart(item));
             }}
           >
