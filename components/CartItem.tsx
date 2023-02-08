@@ -6,6 +6,7 @@ import {
   ShoppingCartItem,
 } from "../redux/cart/cartSlice";
 import { useAppDispatch } from "../redux/hooks";
+import { BsDot } from "react-icons/bs";
 
 const CartItem = ({ item }: { item: ShoppingCartItem }) => {
   const dispatch = useAppDispatch();
@@ -27,12 +28,27 @@ const CartItem = ({ item }: { item: ShoppingCartItem }) => {
             {item.product.productName}
           </Link>
         </a>
-        <div>{`$${item.product.price}`}</div>
-        <div>{`In Cart: ${item.count}`}</div>
+        <div className="flex">
+          <div>{`$${item.product.price}`}</div>
+          <div className="text-xs translate-y-1">{"/item"}</div>
+        </div>
       </div>
-      <img src={item.product.imageLink[0]} />
-      <div>{item.product.description}</div>
-      <div>{item.product.seller}</div>
+      <div className="flex gap-2 align-middle">
+        <div>{`In Cart: ${item.count}`}</div>
+        <BsDot className="translate-y-1" />
+        <div className="text-blue-600 font-semibold text-xs translate-y-1">
+          {item.product.seller}
+        </div>
+      </div>
+      <div className="flex gap-5">
+        <img
+          className="aspect-square object-cover w-[30%]"
+          src={item.product.imageLink[0]}
+        />
+        <div>
+          <div>{item.product.description}</div>
+        </div>
+      </div>
     </>
   );
 };
