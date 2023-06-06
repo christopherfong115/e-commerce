@@ -11,7 +11,7 @@ export default function Document() {
           rel="stylesheet"
         />
       </Head>
-      <body>
+      <body className="scroll_container_page">
         <Main />
         <NextScript />
       </body>

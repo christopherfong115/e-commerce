@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { motion } from "framer-motion";
 import {
@@ -17,6 +17,12 @@ const login = () => {
   const [password, setPassword] = useState("");
   const [loginErr, setLoginErr] = useState<any>();
   const [user, loading, error] = useAuthState(auth);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoginErr("");
+    }, 8000);
+  }, [loginErr]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -36,6 +42,9 @@ const login = () => {
             <div className="text-2xl font-bold">Login to Store</div>
             <motion.div className="w-full h-1 bg-indigo-500"></motion.div>
           </div>
+          {loginErr ? (
+            <div className="text-red-500">{loginErr.error}</div>
+          ) : null}
           <form
             onSubmit={async (e) => {
               e.preventDefault();

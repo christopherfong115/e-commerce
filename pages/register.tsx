@@ -26,7 +26,7 @@ const register = () => {
                 alert("Mismatching passwords!");
               }
               await EmailPasswordRegister(name, email, password);
-              router.push("/");
+              router.push("/login");
             }}
             className="flex flex-col gap-4"
           >

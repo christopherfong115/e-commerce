@@ -18,17 +18,19 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="overflow-y-hidden">
       <Head>
         <title>Store</title>
       </Head>
       <Navbar />
-      <SectionTitle title={"Home"} />
-      {gridProducts ? (
-        <ProductGrid items={gridProducts} />
-      ) : (
-        <div>Loading products...</div>
-      )}
-    </>
+      <div>
+        <SectionTitle title={"Home"} />
+        {gridProducts ? (
+          <ProductGrid items={gridProducts} />
+        ) : (
+          <div className="text-black">Loading products...</div>
+        )}
+      </div>
+    </div>
   );
 }

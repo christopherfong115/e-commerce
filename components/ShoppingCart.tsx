@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { useAppSelector } from "../redux/hooks";
 import CartItem from "./CartItem";
+import { motion } from "framer-motion";
 
 const ShoppingCart = ({
   menuStatus,
@@ -12,6 +13,28 @@ const ShoppingCart = ({
   const { cart } = useAppSelector((state) => state.cart);
   console.log(menuStatus);
   const [total, setTotal] = useState(0);
+
+  // Framer motion
+  const cartAnimate = {
+    hidden: { x: 500 },
+    show: {
+      x: 0,
+      transition: {
+        staggerChildren: 0.1,
+        ease: "easeIn",
+        when: "beforeChildren",
+        duration: 0.5,
+      },
+    },
+  };
+
+  const cartItemsAnimate = {
+    hidden: { filter: "blur(3px)", y: 50 },
+    show: {
+      filter: "blur(0px)",
+      y: 0,
+    },
+  };
 
   useEffect(() => {
     let temp = 0;
@@ -33,14 +56,24 @@ const ShoppingCart = ({
             }}
             className="fixed overflow-hidden bg-black/75 bg-opacity-75 z-30 h-screen w-screen"
           ></div>
-          <div className="absolute bg-white h-full overflow-y-scroll w-[700px] p-5 right-0 z-50 ">
+          <motion.div
+            variants={cartAnimate}
+            animate="show"
+            initial="hidden"
+            transition={{ ease: "easeIn", duration: 1 }}
+            className="fixed bg-white h-full overflow-y-scroll w-[700px] p-5 right-0 z-50 "
+          >
             {cart.length != 0 ? (
-              <div>
+              <motion.div>
                 <ul className="flex flex-col gap-2">
                   {cart.map((product) => (
-                    <li className="" key={product.product.productid}>
+                    <motion.li
+                      variants={cartItemsAnimate}
+                      className=""
+                      key={product.product.productid}
+                    >
                       <CartItem item={product} />
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
                 <div className="mt-2 flex justify-between">
@@ -49,11 +82,11 @@ const ShoppingCart = ({
                     Pay now
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ) : (
               <div>Empty Cart.</div>
             )}
-          </div>
+          </motion.div>
         </>
       ) : null}
     </>
