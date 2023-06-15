@@ -8,11 +8,7 @@ import { RxTriangleDown } from "react-icons/rx";
 import LoginDropDown from "./LoginDropDown";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
-const paths = [
-  ["Mens", "/mens"],
-  ["Women", "/women"],
-  ["Children", "/children"],
-];
+const paths = [["", "/"]];
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);

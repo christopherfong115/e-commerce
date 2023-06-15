@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar";
 import { useRouter } from "next/router";
 import { fetchProduct } from "../../lib/fetchProduct";
 import { GetStaticPaths } from "next";
+import PhotoCarousel from "../../components/PhotoCarousel";
 
 const ProductPage = ({ products }: { products: any }) => {
   // const router = useRouter();

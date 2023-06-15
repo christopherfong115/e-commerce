@@ -21,7 +21,7 @@ const ShoppingCart = ({
       x: 0,
       transition: {
         staggerChildren: 0.1,
-        ease: "easeIn",
+        ease: "easeInOut",
         when: "beforeChildren",
         duration: 0.5,
       },
