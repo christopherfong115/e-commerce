@@ -1,16 +1,16 @@
 import Head from "next/head";
-import { Product } from "../../redux/cart/cartSlice";
 import Navbar from "../../components/Navbar";
-import { useRouter } from "next/router";
-import { fetchProduct } from "../../lib/fetchProduct";
 import { GetStaticPaths } from "next";
 import PhotoCarousel from "../../components/PhotoCarousel";
+import { addToCart, Product } from "../../redux/cart/cartSlice";
+import { useAppDispatch } from "../../redux/hooks";
 
 const ProductPage = ({ products }: { products: any }) => {
   // const router = useRouter();
   // const productid = router.query.productid as string;
   // console.log(productid);
   // const product = await fetchProduct(productid);
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -18,11 +18,28 @@ const ProductPage = ({ products }: { products: any }) => {
         <title>{products.productName}</title>
       </Head>
       <Navbar />
+      {/* <h1>{products.inStock}</h1> */}
       <div>
-        <h1>{products.productName}</h1>
-        <h1>{products.inStock}</h1>
-        <img src={products.imageLink[0]} />
-        <div>{products.description}</div>
+        <div className="p-4 flex flex-row gap-10">
+          <PhotoCarousel images={products.imageLink} />
+          <div>
+            <div className="w-[98%] mx-auto h-1 bg-black" />
+            <h1 className="text-2xl font-extrabold text-center">
+              {products.productName}
+            </h1>
+            <div className="w-[98%] mx-auto h-1 bg-black" />
+            <div>{products.description}</div>
+            <button
+              className="bg-purple-500 text-white px-4 py-2 rounded-xl w-full"
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(addToCart(products));
+              }}
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
         <div>{`$${products.price}`}</div>
       </div>
     </>
