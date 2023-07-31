@@ -1,12 +1,12 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../../../components/Navbar";
 import { motion } from "framer-motion";
 import {
   auth,
   EmailPasswordLogin,
   signInWithGoogle,
-} from "../firebase/clientApp";
+} from "../../../firebase/clientApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -96,13 +96,13 @@ const login = () => {
             <div className="">
               Forgot your password?{" "}
               <a className="text-blue-600 hover:text-blue-400 underline">
-                <Link href="/passwordReset">Reset Password</Link>
+                <Link href="/v1/auth/passwordReset">Reset Password</Link>
               </a>
             </div>
             <div className="">
               Don't have an account?{" "}
               <a className="text-blue-600 hover:text-blue-400 underline">
-                <Link href="/register">Register</Link>
+                <Link href="/v1/auth/register">Register</Link>
               </a>
             </div>
           </div>

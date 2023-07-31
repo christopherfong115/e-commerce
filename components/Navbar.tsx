@@ -51,7 +51,7 @@ const Navbar = () => {
               </li>
             ) : (
               <li className="hover:text-emerald-500">
-                <Link href="/login">Login</Link>
+                <Link href="/v1/auth/login">Login</Link>
               </li>
             )}
             <li className="relative">

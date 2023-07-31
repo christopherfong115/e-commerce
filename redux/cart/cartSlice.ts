@@ -53,8 +53,21 @@ export const cartSlice = createSlice({
         (item) => item.product.productid != action.payload.productid
       );
     },
+    addNumToCart: (state, action: PayloadAction<ShoppingCartItem>) => {
+      for (let i = 0; i < state.cart.length; i++) {
+        if (
+          state.cart[i].product.productid === action.payload.product.productid
+        ) {
+          state.cart[i].count += action.payload.count;
+          return;
+        }
+      }
+    },
+    emptyCart: (state) => {
+      state.cart = [];
+    },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, addNumToCart } = cartSlice.actions;
 export default cartSlice.reducer;

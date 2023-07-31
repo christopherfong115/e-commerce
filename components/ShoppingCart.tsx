@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
 import { useAppSelector } from "../redux/hooks";
 import CartItem from "./CartItem";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const ShoppingCart = ({
   menuStatus,
@@ -78,9 +79,11 @@ const ShoppingCart = ({
                 </ul>
                 <div className="mt-2 flex justify-between">
                   <div className="font-bold">{`Cart Total: $${total}`}</div>
-                  <button className="bg-purple-300 py-1 px-2 rounded-2xl font-bold text-white">
-                    Pay now
-                  </button>
+                  <Link href="/checkout/cart">
+                    <button className="bg-purple-300 py-1 px-2 rounded-2xl font-bold text-white">
+                      Pay now
+                    </button>
+                  </Link>
                 </div>
               </motion.div>
             ) : (

@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
-import { EmailPasswordRegister } from "../firebase/clientApp";
+import Navbar from "../../../components/Navbar";
+import { EmailPasswordRegister } from "../../../firebase/clientApp";
 
 const register = () => {
   const router = useRouter();

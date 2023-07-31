@@ -2,8 +2,15 @@ import Head from "next/head";
 import Navbar from "../../components/Navbar";
 import { GetStaticPaths } from "next";
 import PhotoCarousel from "../../components/PhotoCarousel";
-import { addToCart, Product } from "../../redux/cart/cartSlice";
+import {
+  addToCart,
+  Product,
+  ShoppingCartItem,
+  addNumToCart,
+} from "../../redux/cart/cartSlice";
 import { useAppDispatch } from "../../redux/hooks";
+import ProductItemTitle from "../../components/ProductItemTitle";
+import { useEffect, useState } from "react";
 
 const ProductPage = ({ products }: { products: any }) => {
   // const router = useRouter();
@@ -11,6 +18,13 @@ const ProductPage = ({ products }: { products: any }) => {
   // console.log(productid);
   // const product = await fetchProduct(productid);
   const dispatch = useAppDispatch();
+  const [numProduct, setNumProduct] = useState(1);
+
+  useEffect(() => {
+    if (numProduct <= 0) {
+      setNumProduct(1);
+    }
+  }, [numProduct]);
 
   return (
     <>
@@ -20,17 +34,32 @@ const ProductPage = ({ products }: { products: any }) => {
       <Navbar />
       {/* <h1>{products.inStock}</h1> */}
       <div>
-        <div className="p-4 flex flex-row gap-10">
+        <div className="p-4 flex gap-10">
           <PhotoCarousel images={products.imageLink} />
-          <div>
-            <div className="w-[98%] mx-auto h-1 bg-black" />
-            <h1 className="text-2xl font-extrabold text-center">
-              {products.productName}
-            </h1>
-            <div className="w-[98%] mx-auto h-1 bg-black" />
-            <div>{products.description}</div>
+          <div className="w-full flex flex-col">
+            <ProductItemTitle productName={products.productName} />
+            <div className="py-10">{products.description}</div>
+            <div className="flex gap-4 mb-5 outline w-fit text-center items-center">
+              <button
+                className="bg-red-500 text-white w-8 font-extrabold text-2xl"
+                onClick={(e) => setNumProduct(numProduct - 1)}
+              >
+                -
+              </button>
+              <input
+                className="w-4"
+                onChange={(e) => setNumProduct(parseInt(e.target.value))}
+                value={numProduct}
+              />
+              <button
+                className="bg-red-500 text-white w-8 font-extrabold text-2xl"
+                onClick={(e) => setNumProduct(numProduct + 1)}
+              >
+                +
+              </button>
+            </div>
             <button
-              className="bg-purple-500 text-white px-4 py-2 rounded-xl w-full"
+              className="bg-purple-500 hover:bg-purple-400 active:bg-purple-600 text-white px-4 py-2 rounded-xl w-full"
               onClick={(e) => {
                 e.preventDefault();
                 dispatch(addToCart(products));
